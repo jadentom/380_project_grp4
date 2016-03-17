@@ -1,3 +1,5 @@
+// DEPRECATING; USE COMPASS.CPP
+
 #include "Magnetometer.h"
 #include <Wire.h>
 
