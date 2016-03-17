@@ -19,6 +19,7 @@ void setup() {
   Wire.begin(); //Start I2C library
   MotorControl motors;
   Magnetometer magnetometer;
+  Compass compass;
   //DistanceSensor dsensor;
   Button button;
   Serial.println("Starting tests");
@@ -29,6 +30,7 @@ void setup() {
   pinMode(52, OUTPUT);
   digitalWrite(52, HIGH);
 
+  /*
   button.waitForPush();
   Serial.println("Started motor");
   motors.forward(255);
@@ -37,10 +39,11 @@ void setup() {
   motors.stop();
   Serial.println("Stopped");
   while (true);
+  */
 }
 
 void loop() {
-  Serial.println("In loop");
+  //Serial.println(compass.readAngle();
   delay(1000);
   //while (true);
 }
