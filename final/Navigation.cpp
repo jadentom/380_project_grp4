@@ -19,14 +19,14 @@ float getExpectedDistanceToWall(float x, float y, float heading){
 	float dX = cos(heading);
 	float dY = sin(heading);
 	float t0x, t0y, t1x, t1y;
-	if(dX = 0){
+	if(dX == 0){
 		t0x = -1;
 		t1x = -1;
 	}else{
 		t0x = (0-x)/Dx;
 		t1x = (ARENA_WIDTH - x)/Dx;
 	}
-	if(dY = 0){
+	if(dY == 0){
 		t0y = -1;
 		t1y = -1;
 	}else{
