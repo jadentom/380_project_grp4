@@ -19,7 +19,8 @@ class MotorControl{
 
 
   public:
-	float kpl,kpr;
+	float kpl,kprkil,kir;
+	float intLeft,intRight;
 	int axilCoff;
     MotorControl(float* right_rate, float* left_rate);
 	void pidLeft(int speedTarget);

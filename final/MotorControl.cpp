@@ -18,12 +18,17 @@ MotorControl::MotorControl(float* right_rate, float* left_rate) {
   pinMode(RIGHT_PWM_PIN, OUTPUT);
   kpl = 4;
   kpr = 4;
+  kil = 0.5;
+  kir = 0.5;
   axilCoff = 145 / 140;
+  intLeft = 0;
+  intRight = 0;
 }
 
 void MotorControl::pidLeft(int speedTarget){
 	float error = 0.40268456 * (*left_rate) - speedTarget;
-	float u = error * kpl;
+	intLeft += error;
+	float u = error * kpl + intLeft *kil;
 	if(u > 255){
 		u = 255;
 	}else if(u < -256){
@@ -34,7 +39,8 @@ void MotorControl::pidLeft(int speedTarget){
 }
 void MotorControl::pidRight(int speedTarget){
 	float error = 0.40268456 * (*right_rate) - speedTarget;
-	float u = error * kpr;
+	intRight += error;
+	float u = error * kpr + intLeft *kil;
 	if(u > 255){
 		u = 255;
 	}else if(u < -256){
