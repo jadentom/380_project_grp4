@@ -2,8 +2,8 @@
 #define DISTANCE_SENSOR_H
 
 #include <Wire.h>
-#include <Maxbotix.h>
-#include <SparkFun_VL6180X.h>
+#include "Maxbotix.h"
+#include "SparkFun_VL6180X.h"
 
 class DistanceSensor {
   public:

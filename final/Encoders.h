@@ -10,8 +10,8 @@ class Encoders {
   public:
 
     // properties
-	int left_rate, right_rate;
-	unsigned long left_sum, right_sum,
+	float left_rate, right_rate;
+	long left_sum, right_sum,
 		left_periodStart, right_periodStart;
 	bool left_aSet, right_aSet,
 		left_bSet, right_bSet;
@@ -22,6 +22,9 @@ class Encoders {
     void rightTriggerA();
     void leftTriggerB();
     void rightTriggerB();
+
+    void triggerA(bool& aSet, bool& bSet, int pinA, long& periodStart, long& sum, float& rate);
+    void triggerB(bool& bSet);
 };
 
 extern Encoders encoders;

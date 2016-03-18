@@ -1,6 +1,4 @@
 #include "DistanceSensor.h"
-#include <Maxbotix.h>
-#include <SparkFun_VL6180X.h>
 #include <Wire.h>
 
 #define VL6180X_ADDRESS 0x29 // For the IR ToF range finder

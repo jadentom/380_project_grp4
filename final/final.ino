@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include <Maxbotix.h>
+#include "Maxbotix.h"
 //#include "TimerThree.h"
 #include "Magnetometer.h"
 //#include "DistanceSensor.h"
@@ -14,6 +14,7 @@ MotorControl motors;
 //DistanceSensor dsensor;
 Button button;
 */
+Encoders encoders;
 
 void setup() {
   // put your setup code here, to run once:
@@ -25,6 +26,28 @@ void setup() {
   Navigation navigation;
   //DistanceSensor dsensor;
   Button button;
+  encoders = encoders();
+
+  //must be done here because sketch functions must be referenced
+  attachInterrupt(
+    digitalPinToInterrupt(
+    LEFT_ENCODER_PIN_A),
+    leftTriggerAWrapper,
+    CHANGE);
+  attachInterrupt(
+    digitalPinToInterrupt(
+    LEFT_ENCODER_PIN_B),
+    leftTriggerBWrapper,
+    RISING);
+  attachInterrupt(
+    digitalPinToInterrupt(LEFT_ENCODER_PIN_A),
+    rightTriggerAWrapper,
+    CHANGE);
+  attachInterrupt(
+    digitalPinToInterrupt(LEFT_ENCODER_PIN_B),
+    rightTriggerBWrapper,
+    RISING);
+  
   Serial.println("Starting tests");
 
   //while (true);
@@ -52,6 +75,20 @@ void loop() {
   //Serial.println(compass.readAngle();
   delay(1000);
   //while (true);
+}
+
+// interrupts must be in sketch. Must be here
+leftTriggerAWrapper(){
+  encoders.leftTriggerA();
+}
+rightTriggerAWrapper(){
+  encoders.rightTriggerA();
+}
+leftTriggerBWrapper(){
+  encoders.leftTriggerB();
+}
+rightTriggerAWrapper(){
+  encoders.rightTriggerA();
 }
 
 
