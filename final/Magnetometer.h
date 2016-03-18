@@ -1,3 +1,6 @@
+#ifndef MAGNETOMETER_H
+#define MAGNETOMETER_H
+
 // DEPRECATING; USE COMPASS.H
 
 #define mag_address 0x1E
@@ -22,3 +25,5 @@ class Magnetometer
 };
 
 extern Magnetometer magnetometer;
+
+#endif

@@ -1,4 +1,5 @@
-
+#ifndef ENCODERS_H
+#define ENCODERS_H
 
 #define LEFT_ENCODER_PIN 18
 #define RIGHT_ENCODER_PIN 2
@@ -23,3 +24,4 @@ class Encoders {
 
 extern Encoders encoders;
 
+#endif

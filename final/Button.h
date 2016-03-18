@@ -1,3 +1,6 @@
+#ifndef BUTTON_H
+#define BUTTON_H
+
 class Button {
   public:
     // properties
@@ -9,3 +12,4 @@ class Button {
 
 extern Button button;
 
+#endif
