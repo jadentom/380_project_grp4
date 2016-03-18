@@ -22,7 +22,7 @@ MotorControl::MotorControl(float* right_rate, float* left_rate) {
 }
 
 void MotorControl::pidLeft(int speedTarget){
-	float error = 590 * (*left_rate) - speedTarget;
+	float error = 0.40268456 * (*left_rate) - speedTarget;
 	float u = error * kpl;
 	if(u > 255){
 		u = 255;
@@ -33,7 +33,7 @@ void MotorControl::pidLeft(int speedTarget){
 	
 }
 void MotorControl::pidRight(int speedTarget){
-	float error = 590 * (*right_rate) - speedTarget;
+	float error = 0.40268456 * (*right_rate) - speedTarget;
 	float u = error * kpr;
 	if(u > 255){
 		u = 255;
