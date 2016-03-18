@@ -10,6 +10,7 @@
 typedef struct{
   int xmin,xmax,ymin,ymax;
   float xscale,xshift,yscale,yshift;
+  float origin_angle;
 } Compass_Calibration;
 
 class Compass {
@@ -21,6 +22,7 @@ class Compass {
     // methods
     Compass();
     float clamp(float inp);
+    float getMapAngle(bool motor, bool upright);
     float getAngle(bool motor, bool upright);
     byte readMagnetometer(int * x, int * y);
 };

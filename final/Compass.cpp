@@ -20,13 +20,42 @@ Compass::Compass() {
   compassMotor = *((Compass_Calibration*)p);
 };
 
-float clamp (float inp) {
+float Compass::clamp (float inp) {
   if (inp > 1) {
     return 1;
   } else if (inp < -1) {
     return -1;
   }
   return inp;
+}
+
+float Compass::getMapAngle(bool motor, bool upright) {
+  float angle = getAngle(motor, upright);
+  float compass_angle;
+  float new_angle;
+
+  if (motor) {
+    compass_angle = compassMotor.origin_angle;
+  } else {
+    compass_angle = compassNormal.origin_angle;
+  }
+
+  if (!upright) {
+    // Reflect the angle about the y axis
+    if (compass_angle > 0) {
+      compass_angle = PI - compass_angle;
+    } else {
+      compass_angle = -PI - compass_angle;
+    }
+  }
+  
+  new_angle = angle - compass_angle;
+  if (new_angle < -PI) {
+    new_angle += 2*PI;
+  } else if (new_angle > PI) {
+    new_angle -= 2*PI;
+  }
+  return new_angle;
 }
 
 float Compass::getAngle(bool motor, bool upright){

@@ -1,10 +1,10 @@
 #ifndef ENCODERS_H
 #define ENCODERS_H
 
-#define LEFT_ENCODER_PIN_A 19
-#define LEFT_ENCODER_PIN_B 18
-#define RIGHT_ENCODER_PIN_A 3
-#define RIGHT_ENCODER_PIN_B 2
+#define LEFT_ENCODER_PIN_A 3
+#define LEFT_ENCODER_PIN_B 2
+#define RIGHT_ENCODER_PIN_A 19
+#define RIGHT_ENCODER_PIN_B 18
 
 // interrupts must be in sketch. Encoders must be here
 float left_rate, right_rate;

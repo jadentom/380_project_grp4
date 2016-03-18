@@ -2,12 +2,13 @@
 #include "Maxbotix.h"
 //#include "TimerThree.h"
 #include "Magnetometer.h"
-//#include "DistanceSensor.h"
+#include "DistanceSensor.h"
 #include "MotorControl.h"
 #include "Button.h"
 #include "Compass.h"
 #include "Navigation.h"
 #include "Encoders.h"
+#include "Fusion.h"
 
 /*
 MotorControl motors;
@@ -20,12 +21,14 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   Wire.begin(); //Start I2C library
+
   Magnetometer magnetometer;
   Compass compass;
   Navigation navigation;
-  //DistanceSensor dsensor;
+  DistanceSensor dsensor;
   Button button;
   MotorControl motors(&right_rate, &left_rate);
+  Fusion fusion(&compass);
 
   //must be done here because sketch functions must be referenced
   initialize_encoders();
@@ -40,21 +43,72 @@ void setup() {
     leftTriggerB,
     RISING);
   attachInterrupt(
-    digitalPinToInterrupt(LEFT_ENCODER_PIN_A),
+    digitalPinToInterrupt(RIGHT_ENCODER_PIN_A),
     rightTriggerA,
     CHANGE);
   attachInterrupt(
-    digitalPinToInterrupt(LEFT_ENCODER_PIN_B),
+    digitalPinToInterrupt(RIGHT_ENCODER_PIN_B),
     rightTriggerB,
     RISING);
   
   Serial.println("Starting tests");
-
-  //while (true);
-  
-  //Turn the LED on
   pinMode(52, OUTPUT);
   digitalWrite(52, HIGH);
+
+  //while (true);
+  button.waitForPush();
+  digitalWrite(52, LOW);
+
+  /*
+  //motors.forward(-40);
+  delay(1000);
+  while (digitalRead(26) == HIGH) {
+    Serial.println("Here..");
+    //motors.spinCCW(-40);
+    //motors.forward(-5);
+    //motors.pidRight(-5);
+    //Serial.println(dsensor.getDistance());
+    //Serial.println(compass.getMapAngle(false, false));
+    //motors.spin
+    Serial.println(fusion.fuse(&left_sum, &right_sum, false, true));
+    delay(500);
+  }
+  Serial.println(left_sum);
+  Serial.println(right_sum);
+  delay(1000);
+  //Turn the LED on
+  digitalWrite(52, HIGH);
+  motors.stop();
+  
+  while(true);
+  button.waitForPush();
+  */
+
+  //TURN TO AN ANGLE
+  
+  float desired_angle = 0;
+  float error = 0.25;
+  //motors.spinCCW(-3);
+  //motors.stop();
+  while(true);
+  delay(1000);
+  while (digitalRead(26) == HIGH) {
+    motors.spinCCW(-10);
+    Serial.println(1000 * left_rate);
+    Serial.println(1000 * right_rate);
+    delay(500);
+  }
+  motors.stop();
+  //while (abs(compass.getMapAngle(false, false) - desired_angle) > error) {
+  //  Serial.println(compass.getMapAngle(false, false));
+  //}
+  //while (abs(fusion.fuse(&left_sum, &right_sum, false, false) - desired_angle) > error) {
+  //  Serial.println(compass.getMapAngle(false, false));
+  //}
+  motors.stop();
+  
+
+  while(true);
 
   Serial.println(navigation.smallestPositive(1,2));
   Serial.println(navigation.getExpectedDistanceToWall(0,0,0));
@@ -77,41 +131,19 @@ void loop() {
   //while (true);
 }
 
-
 /*
-void registerEncoderISRs() {
-  attachInterrupt(
-    digitalPinToInterrupt(LEFT_ENCODER_PIN_1),
-    motorLeftEdge1Callback,
-    FALLING);
-    
-  attachInterrupt(
-    digitalPinToInterrupt(LEFT_ENCODER_PIN_2),
-    motorLeftEdge2Callback,
-    FALLING);
-}
+void turnToAngle(int angle) {}
+void driveForward(float speed) {}
+void mapEnclosure() {
+  int x,y;
+  turnToAngle(-90);
+  driveForward(5);
+  while (dsensor.getDistance() < 40);
+  turnToAngle(-90);
+  y = dsensor.getDistance();
 
-
-void motorLeftEdge1Callback() {
-  //Serial.println("Left edge 1 fall");
-  left1_count += 1;
-}
-
-void motorLeftEdge2Callback() {
-  //Serial.println("Left edge 2 fall");
-  left2_count += 1;
-}
-
-void timerStart() {
-  Timer3.initialize(1000000); //Initialize timer1, set to 20Hz
-  Timer3.attachInterrupt(timerCallback);
-}
-
-void timerCallback() {
-  Serial.print("Left1: ");
-  Serial.println(left1_count);
-  Serial.print("Left2: ");
-  Serial.println(left2_count);
-}
-*/
+  turnToAngle(-180);
+  x = dsensor.getDistance();
+  //Map the environment
+}*/
 

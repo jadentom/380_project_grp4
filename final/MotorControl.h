@@ -19,12 +19,16 @@ class MotorControl{
 
 
   public:
-	float kpl,kpr,kil,kir;
-	float intLeft,intRight;
-	int axilCoff;
+
+    // properties
+    float kpl,kpr,kil,kir;
+    float intLeft,intRight;
+    int axilCoff;
+
+    // methods
     MotorControl(float* right_rate, float* left_rate);
-	void pidLeft(int speedTarget);
-	void pidRight(int speedTarget);
+    void pidLeft(int speedTarget);
+    void pidRight(int speedTarget);
     void spinRight(int speed);
     void spinLeft(int speed);
     void setUpsideDown();

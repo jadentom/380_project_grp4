@@ -29,8 +29,8 @@ float DistanceSensor::getUltrasonic() {
 float DistanceSensor::getDistance() {
   float tof = getTof();
   if (tof > 25.0) {
-    return tof;
+    return getUltrasonic();
   }
-  return getUltrasonic();
+  return tof;
 }
 

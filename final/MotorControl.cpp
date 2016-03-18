@@ -16,17 +16,21 @@ MotorControl::MotorControl(float* right_rate, float* left_rate) {
   pinMode(RIGHT_DIGITAL_PIN, OUTPUT);
   pinMode(LEFT_PWM_PIN, OUTPUT);
   pinMode(RIGHT_PWM_PIN, OUTPUT);
+
   kpl = 4;
   kpr = 4;
-  kil = 0.5;
-  kir = 0.5;
+  kil = 0.1;
+  kir = 0.1;
+
   axilCoff = 145 / 140;
   intLeft = 0;
   intRight = 0;
 }
 
 void MotorControl::pidLeft(int speedTarget){
-	float error = 0.40268456 * (*left_rate) - speedTarget;
+	float error =  speedTarget - (0.40268456 * (*left_rate));
+  Serial.print("error-l: ");
+  Serial.println(error);
 	intLeft += error;
 	float u = error * kpl + intLeft *kil;
 	if(u > 255){
@@ -38,9 +42,11 @@ void MotorControl::pidLeft(int speedTarget){
 	
 }
 void MotorControl::pidRight(int speedTarget){
-	float error = 0.40268456 * (*right_rate) - speedTarget;
+	float error = speedTarget - (0.40268456 * (*right_rate));
+  Serial.print("error-r: ");
+  Serial.println(error);
 	intRight += error;
-	float u = error * kpr + intLeft *kil;
+	float u = error * kpr + intRight *kir;
 	if(u > 255){
 		u = 255;
 	}else if(u < -256){
