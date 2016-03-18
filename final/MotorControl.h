@@ -1,8 +1,6 @@
 #ifndef MOTOR_CONTROL_H
 #define MOTOR_CONTROL_H
 
-#include "Encoders.h"
-
 class MotorControl{
   private:
     /*
@@ -16,13 +14,14 @@ class MotorControl{
     */
 
     bool isUpsideDown = false;
-	Encoders* encoders;
+    float* right_rate;
+    float*left_rate;
 
 
   public:
 	float kpl,kpr;
 	int axilCoff;
-    MotorControl(Encoders* encoders);
+    MotorControl(float* right_rate, float* left_rate);
 	void pidLeft(int speedTarget);
 	void pidRight(int speedTarget);
     void spinRight(int speed);

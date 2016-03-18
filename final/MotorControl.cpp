@@ -9,7 +9,9 @@
 #define  LEFT_PWM_PIN 5
 #define RIGHT_PWM_PIN 4
 
-MotorControl::MotorControl(Encoders* encoders) {
+MotorControl::MotorControl(float* right_rate, float* left_rate) {
+  this->right_rate = right_rate;
+  this->left_rate = left_rate;
   pinMode(LEFT_DIGITAL_PIN, OUTPUT);
   pinMode(RIGHT_DIGITAL_PIN, OUTPUT);
   pinMode(LEFT_PWM_PIN, OUTPUT);
@@ -17,26 +19,25 @@ MotorControl::MotorControl(Encoders* encoders) {
   kpl = 4;
   kpr = 4;
   axilCoff = 145 / 140;
-  this.encoders = encoders;
 }
 
 void MotorControl::pidLeft(int speedTarget){
-	float error = 590 * encoders->leftrate - speedTarget;
+	float error = 590 * (*left_rate) - speedTarget;
 	float u = error * kpl;
 	if(u > 255){
 		u = 255;
-	}elseif(u < -256){
+	}else if(u < -256){
 		u = -256;
 	}
 	spinLeft(u + 0.5);
 	
 }
 void MotorControl::pidRight(int speedTarget){
-	float error = 590 * encoders->righttrate - speedTarget;
+	float error = 590 * (*right_rate) - speedTarget;
 	float u = error * kpr;
 	if(u > 255){
 		u = 255;
-	}elseif(u < -256){
+	}else if(u < -256){
 		u = -256;
 	}
 	spinRight(u + 0.5);
