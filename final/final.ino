@@ -5,6 +5,8 @@
 //#include "DistanceSensor.h"
 #include "MotorControl.h"
 #include "Button.h"
+#include "Compass.h"
+#include "Navigation.h"
 
 /*
 MotorControl motors;
@@ -20,6 +22,7 @@ void setup() {
   MotorControl motors;
   Magnetometer magnetometer;
   Compass compass;
+  Navigation navigation;
   //DistanceSensor dsensor;
   Button button;
   Serial.println("Starting tests");
@@ -29,6 +32,9 @@ void setup() {
   //Turn the LED on
   pinMode(52, OUTPUT);
   digitalWrite(52, HIGH);
+
+  Serial.println(navigation.smallestPositive(1,2));
+  Serial.println(navigation.getExpectedDistanceToWall(0,0,0));
 
   /*
   button.waitForPush();

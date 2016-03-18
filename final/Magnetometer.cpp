@@ -30,11 +30,6 @@ void Magnetometer::getValues() {
     y = Wire.read()<<8; //Y msb
     y |= Wire.read(); //Y lsb
   }
-
-  //Serial.println(x);
-  //Serial.println(y);
-  //Serial.println(z);
-  //Serial.println("");
 }
 void Magnetometer::calibration() {}
 void Magnetometer::getAngle() {}
