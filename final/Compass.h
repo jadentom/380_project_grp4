@@ -1,3 +1,6 @@
+#ifndef COMPASS_H
+#define COMPASS_H
+
 #include <Wire.h>
 #include <EEPROM.h>
 #include <Arduino.h>
@@ -24,3 +27,4 @@ class Compass {
 
 extern Compass compass;
 
+#endif

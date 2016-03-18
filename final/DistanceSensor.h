@@ -1,3 +1,6 @@
+#ifndef DISTANCE_SENSOR_H
+#define DISTANCE_SENSOR_H
+
 #include <Wire.h>
 #include <Maxbotix.h>
 #include <SparkFun_VL6180X.h>
@@ -19,3 +22,4 @@ class DistanceSensor {
 
 extern DistanceSensor distance_sensor;
 
+#endif

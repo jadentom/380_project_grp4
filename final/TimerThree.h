@@ -1,3 +1,6 @@
+#ifndef TIMER_THREE_H
+#define TIMER_THREE_H
+
 /*
  *  Interrupt and PWM utilities for 16 bit Timer3 on ATmega168/328
  *  Original code by Jesse Tane for http://labs.ideo.com August 2008
@@ -39,3 +42,5 @@ class TimerThree
 };
 
 extern TimerThree Timer3;
+
+#endif

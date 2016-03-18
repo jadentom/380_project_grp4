@@ -1,3 +1,6 @@
+#ifndef MOTOR_CONTROL_H
+#define MOTOR_CONTROL_H
+
 class MotorControl{
   private:
     /*
@@ -24,3 +27,5 @@ class MotorControl{
     void backward(int speed);
     void stop();
 };
+
+#endif
