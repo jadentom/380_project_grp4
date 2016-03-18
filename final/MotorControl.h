@@ -19,7 +19,7 @@ class MotorControl{
 
 
   public:
-	float kpl,kprkil,kir;
+	float kpl,kpr,kil,kir;
 	float intLeft,intRight;
 	int axilCoff;
     MotorControl(float* right_rate, float* left_rate);
